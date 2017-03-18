@@ -1,0 +1,22 @@
+<md-subheader class="md-primary">MEAN.io makes building apps simpler and faster</md-subheader>
+<script type="text/javascript" src="/bundle/app.js"></script>
+
+{% if (process.env.NODE_ENV == 'development') %}
+  <script type="text/javascript" src="{{'//' + req.hostname + ':35729/livereload.js'}}"></script>
+{% endif %}
+<!-- jQuery Js -->
+<script src="/custom_libs/jquery/dist/jquery.js"></script>
+<!-- Bootstrap Js -->
+<script src="/custom_libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Metis Menu Js -->
+<script src="/custom_libs/js/jquery.metisMenu.js"></script>
+<!-- SmartMenus jQuery plugin -->
+<script type="text/javascript" src="/custom_libs/js/jquery.smartmenus.js"></script>
+<!-- SmartMenus jQuery Keyboard Addon -->
+<script type="text/javascript" src="/custom_libs/js/keyboard/jquery.smartmenus.keyboard.js"></script>
+
+<script type="text/javascript" src="/custom_libs/ckeditor/ckeditor.js"></script>
+
+<script type="text/javascript" src="/custom_libs/prismjs/prism.js" data-manual></script>
+
+<script type="text/javascript" src="/custom_libs/js/myscript.js"></script>
