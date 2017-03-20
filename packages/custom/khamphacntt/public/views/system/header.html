@@ -1,5 +1,5 @@
 
-<div ng-controller="HeaderController as hdrctr" ng-init="getAllCate();getAllSeries();" >
+<div ng-controller="HeaderController as hdrctr">
 <div style="background-color: #ffffff;"  class="container-fluid">
         <div class="col-xs-12 col-sm-12 col-md-4">
             <img src="/meanStarter/assets/img/logokhampha.png" id="logo" alt="Logo khamphacntt">
@@ -22,55 +22,61 @@
         </div>
 </div>
 <div id="main-nav" class="main-nav">
-<nav style="background-color: #3092c0;" class="navbar navbar-default top-navbar" role="navigation">
-  <ul id="main-menu" class="sm sm-blue">
-    <li><h2><a ui-sref="home" href="#">Home</a></h2></li>
-    </li>
+<nav style="background-color: #3092c0;" class="navbar navbar-default top-navbar" role="navigation" ng-controller="NavController" ng-init="getAllCate()">
+<input id="main-menu-state" type="checkbox" />
+<label class="main-menu-btn" for="main-menu-state">
+  <span class="main-menu-btn-icon"></span> Toggle main menu visibility
+</label>
 
-    <li><h2><a href="#">TECHNOLOGIES</a></h2>
-      <ul>
-        <li ng-repeat="item in categories" ><a ui-sref="category post({slug:'{{item.slug}}'})" href="#">{{item.name}}</a>
-        </li>
-      </ul>
-    </li>
+<ul id="main-menu" class="sm sm-blue">
+  <li><h2><a ui-sref="home" href="#">Home</a></h2></li>
+  </li>
 
-    <li><h2><a href="#">SERIES</a></h2>
-      <ul>
-        <li data-ng-repeat="item in series"><a ui-sref="series post({slug:item.slug})" href="#">{{item.name}}</a>
-        </li>
-      </ul>
-    </li>
-
-    <li class="pull-right" ng-if="!hdrctr.hdrvars.authenticated">
-      <a ui-sref="auth.login" href="javascript:void(0);">
-        Login
-      </a>
-    </li>
-    <li></li>
-    <li class="pull-right" ng-if="!hdrctr.hdrvars.authenticated">
-        <a ui-sref="auth.register" href="javascript:void(0);">
-            Register
-        </a>
-    </li>
-
-
-    <li class="dropdown pull-right" ng-show="hdrctr.hdrvars.authenticated">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-              <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-          </a>
-          <ul>
-              <li><a href="#"><i class="fa fa-user fa-fw"></i> {{hdrctr.hdrvars.user.name}}</a>
-              </li>
-              <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-              </li>
-              <li class="divider"></li>
-              <li><a ng-click="hdrctr.logout()" href="javascript:void(0);"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-              </li>
-          </ul>
+  <li><h2><a href="#">TECHNOLOGIES</a></h2>
+    <ul>
+      <li ng-repeat="item in categories" ><a ui-sref="category post({slug:'{{item.slug}}'})" href="#">{{item.name}}</a>
       </li>
-  </ul>
+    </ul>
+  </li>
 
+  <li><h2><a href="#">SERIES</a></h2>
+    <ul>
+      <li data-ng-repeat="item in series"><a ui-sref="series post({slug:item.slug})" href="#">{{item.name}}</a>
+      </li>
+    </ul>
+  </li>
+
+  <li class="pull-right" ng-if="!hdrctr.hdrvars.authenticated">
+    <a ui-sref="auth.login" href="javascript:void(0);">
+      Login
+    </a>
+  </li>
+  <li></li>
+  <li class="pull-right" ng-if="!hdrctr.hdrvars.authenticated">
+      <a ui-sref="auth.register" href="javascript:void(0);">
+          Register
+      </a>
+  </li>
+
+
+  <li class="dropdown pull-right" ng-show="hdrctr.hdrvars.authenticated">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+        </a>
+        <ul>
+            <li><a href="#"><i class="fa fa-user fa-fw"></i> {{hdrctr.hdrvars.user.name}}</a>
+            </li>
+            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+            </li>
+            <li class="divider"></li>
+            <li><a ng-click="hdrctr.logout()" href="javascript:void(0);"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+            </li>
+        </ul>
+    </li>
+</ul>
 </nav>
+
+
 <nav class="navbar-default navbar-side" role="navigation"  ng-if="hdrctr.hdrvars.isAdmin" ng-controller="AdminController">
   <style>
     #page-wrapper{

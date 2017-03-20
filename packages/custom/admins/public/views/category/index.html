@@ -29,7 +29,7 @@
                               <th ng-click="sort('status')">status
                               <span class="glyphicon sort-icon" ng-show="sortKey=='status'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                               </th>
-<!--                               <th>parent</th> -->
+                              <th>parent</th>
                               <th>actions</th>
                           </tr>
                       </thead>
@@ -38,7 +38,7 @@
                               <td><strong>{{ cate.name }}</strong></td>
                               <td>{{ cate.keywords }}</td>
                               <td>{{ cate.status }}</td>
-                              <!-- <td>{{ cate.parent_id }}</td> -->
+                              <td>{{ cate.parent_id }}</td>
                               <td>
                                   <button ng-click="edit(cate);" class="btn btn-default btn-rounded btn-sm"><span class="fa fa-pencil"></span></button>
                                   <button ng-click="delete(cate);" class="btn btn-danger btn-rounded btn-sm"><span class="fa fa-times"></span></button>
