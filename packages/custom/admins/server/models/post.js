@@ -39,7 +39,7 @@ var postSchema = new Schema({
         default: Date.now
     },
     published: {
-        type: String, 
+        type: String,
         enum: ['Yes', 'No'],
         default: 'Yes'
     },
@@ -47,7 +47,7 @@ var postSchema = new Schema({
         type: String
     },
     status: {
-        type: String, 
+        type: String,
         enum: ['show', 'hide'],
         default: 'show'
     },
@@ -97,7 +97,7 @@ var postSchema = new Schema({
     tags: [{
         text: {
             type: String
-        }    
+        }
     }],
     series:[]
 });
@@ -114,8 +114,4 @@ postSchema.pre('update', function(next) {
 
 postSchema.plugin(require('mongoose-paginate'));
 
-try {
-  mongoose.model('Post')
-} catch (error) {
-  mongoose.model('Post', postSchema);
-}
+mongoose.model('Post', postSchema);
