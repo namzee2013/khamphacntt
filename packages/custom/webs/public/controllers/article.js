@@ -20,6 +20,7 @@
                   }
                   $scope.article = article;
                 });
+                Article.pushViewCount(article._id).then(function(response){});
               }
             })
         }

@@ -19,7 +19,7 @@ exports.findAll = function(req, res){
 exports.create = function(req, res){
 
     var post = new Post(req.body);
-    
+
     post.save(function(err, newPost){
         if(err){
             return res.send(400);
@@ -38,7 +38,7 @@ exports.edit = function(req, res){
 exports.update = function(req, res){
     var query = {_id: req.params.id};
     var post = req.post;
-    
+
     post = _.extend(post , req.body);
 
     post.slug = slug(post.title)
@@ -77,4 +77,21 @@ exports.getPostBySlug = function(req, res, next){
         if(err) res.json(err)
         res.json(data);
     })
+}
+
+exports.pushViewCount = function(req, res, next){
+
+  Post.findOne({_id: req.params.id}, function(err, data){
+    var post = data;
+    post.view_count = post.view_count + 1;
+    var query = {_id: post._id};
+    Post.findOneAndUpdate(query, post, function(err) {
+        if (err) {
+            return res.send(err);
+        } else {
+            res.json(post);
+        }
+    });
+  });
+
 }

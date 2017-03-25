@@ -14,6 +14,18 @@
                   deferred.reject(response);
                 });
                 return deferred.promise;
+            },
+            pushViewCount: function(id){
+              var deferred = $q.defer();
+              $http({
+                method: 'GET',
+                url: '/api/post/view-count/' + id
+              }).then(function successCallback(response) {
+                deferred.resolve(response);
+              }, function errorCallback(response) {
+                deferred.reject(response);
+              });
+              return deferred.promise;
             }
         };
     }
