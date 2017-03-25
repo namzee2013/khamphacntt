@@ -12,5 +12,6 @@
 
         app.use(paginate.middleware(10, 50));
         app.get('/api/post-category-paginate', welcome.getPostByCategory);
+        app.get('/api/post-series-paginate', welcome.getPostBySeries);
     };
 })();

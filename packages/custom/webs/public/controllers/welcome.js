@@ -55,6 +55,51 @@
             });
             $scope.isLoading = false;
         }
+
+        $scope.getPostsBySeries = function(){
+          $rootScope.$title = 'Bài viết theo Series';
+          $scope.isLoading = true;
+          Welcome.getSeriesBySlug($stateParams.slug).then(function(response){
+              var _id = response.data._id;
+              Welcome.getPostBySeries(_id, page, limit).then(function(response){
+
+                  $scope.pageBySeries = response.data.page;
+                  $scope.pagesBySeries = response.data.pages;
+                  $scope.limit = response.data.limit;
+                  $scope.news_series_id = _id;
+                  $scope.totalBySeries = response.data.total;
+
+                  var postsBySeries = response.data.data;
+                  angular.forEach(postsBySeries, function(value, key) {
+                      Series.find(value.news_series_id).then(function(response){
+                          value.series.push(response.data);
+                      })
+                  }, this);
+                  $scope.postsBySeries = postsBySeries;
+              });
+          });
+          $scope.isLoading = false;
+        }
+        $scope.loadMoreBySeries = function(){
+            if ($scope.postsBySeries.length >= $scope.totalBySeries) return;
+            $scope.isLoading = true;
+            Welcome.getPostBySeries($scope.news_series_id, $scope.pageBySeries + 1, $scope.limit).then(function(response){
+                $scope.pageBySeries = response.data.page;
+                $scope.pagesBySeries = response.data.pages;
+                $scope.limit = response.data.limit;
+                $scope.totalBySeries = response.data.total;
+
+                var postsBySeries = response.data.data;
+                angular.forEach(postsBySeries, function(value, key) {
+                    Series.find(value.news_series_id).then(function(response){
+                        value.series.push(response.data);
+                    })
+                }, this);
+
+                $scope.postsBySeries = [].concat($scope.postsBySeries, postsBySeries);
+            });
+            $scope.isLoading = false;
+        }
     }
     angular
         .module('mean.webs')

@@ -28,6 +28,14 @@
           // });
 
         }
+
+        $scope.getAllSeries = function(){
+          Nav.getAllSeries().then(function(response){
+            if (response.status == 200) {
+              $scope.series = response.data;
+            }
+          })
+        }
     }
 
     angular

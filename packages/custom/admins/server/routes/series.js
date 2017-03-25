@@ -9,14 +9,14 @@
         var requiresAdmin = circles.controller.hasCircle('admin');
         var requiresLogin = circles.controller.hasCircle('authenticated');
 
-        app.get('/api/series', requiresAdmin, series.findAll);
+        app.get('/api/series', series.findAll);
 
         app.post('/api/series', requiresAdmin, series.create);
 
         app.get('/api/series/:id', series.edit);
 
         app.put('/api/series/:id', requiresAdmin, series.update);
-        
+
         app.delete('/api/series/:id', requiresAdmin, series.delete);
 
         app.get('/api/series/slug/:slug', series.getSeriesBySlug);

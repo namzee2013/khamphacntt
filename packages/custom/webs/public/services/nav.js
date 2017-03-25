@@ -38,6 +38,18 @@
                 deferred.reject(response);
               });
               return deferred.promise;
+            },
+            getAllSeries: function(){
+              var deferred = $q.defer();
+              $http({
+                method: 'GET',
+                url: '/api/series'
+              }).then(function successCallback(response) {
+                deferred.resolve(response);
+              }, function errorCallback(response) {
+                deferred.reject(response);
+              });
+              return deferred.promise;
             }
         };
     }
