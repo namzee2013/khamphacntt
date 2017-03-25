@@ -27,6 +27,10 @@
                     angular.forEach(postsByCate, function(value, key) {
                         Series.find(value.news_series_id).then(function(response){
                             value.series.push(response.data);
+                            var newDay = Date.now()-Date.parse(value.created_at);
+                            if (Math.round(newDay / (1000*60*60*24)) < 15) {
+                              value.new = 'new';
+                            }
                         })
                     }, this);
                     $scope.postsByCate = postsByCate;
@@ -48,6 +52,10 @@
                 angular.forEach(postsByCate, function(value, key) {
                     Series.find(value.news_series_id).then(function(response){
                         value.series.push(response.data);
+                        var newDay = Date.now()-Date.parse(value.created_at);
+                        if (Math.round(newDay / (1000*60*60*24)) < 15) {
+                          value.new = 'new';
+                        }
                     })
                 }, this);
 
@@ -73,6 +81,10 @@
                   angular.forEach(postsBySeries, function(value, key) {
                       Series.find(value.news_series_id).then(function(response){
                           value.series.push(response.data);
+                          var newDay = Date.now()-Date.parse(value.created_at);
+                          if (Math.round(newDay / (1000*60*60*24)) < 15) {
+                            value.new = 'new';
+                          }
                       })
                   }, this);
                   $scope.postsBySeries = postsBySeries;
@@ -93,6 +105,10 @@
                 angular.forEach(postsBySeries, function(value, key) {
                     Series.find(value.news_series_id).then(function(response){
                         value.series.push(response.data);
+                        var newDay = Date.now()-Date.parse(value.created_at);
+                        if (Math.round(newDay / (1000*60*60*24)) < 15) {
+                          value.new = 'new';
+                        }
                     })
                 }, this);
 
