@@ -1,29 +1,31 @@
-<div class="container-fluid content" ng-controller="SearchController" data-ng-init="search()" ng-cloak>
+<div class="container-fluid content" ng-controller="WelcomeController" ng-init="getPostsByCategory()">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 col-md-8">
-
-
-				<article ng-repeat="item in articles">
+				<article ng-if="postsByCate" ng-repeat="item in postsByCate">
 					<section class="animated fadeInUp">
 						<img ng-if="item.image" class="bieutuong" ng-src="/api/files/uploads/{{item.image}}" height="50" width="50" alt="">
 						<div class="header-article">
 							<h1>
 								<a ui-sref="article({slug:item.slug})" href="#">{{ item.title }}  </a>
 							</h1>
+							<h2>
+								Tác giả: <span class="tacgia"> {{ item.author }} </span> Ngày: {{ item.created_at | date:"dd/MM/yyyy" }} Series: <span class="series"><a href="">{{ item.series[0].name }}</a> </span>View: {{ item.view_count }}
+							</h2>
 						</div>
 					</section>
 					<section class="clearfix animated fadeInUp">
-						<!--<div bind-html-compile="item.description">
-                    	</div>-->
+							<div bind-html-compile="item.description">
+                    		</div>
+
 					</section>
 				</article>
 
-				<div ng-if=" articles.length==0 "><h2>Search not found!</h2></div>
+				<div ng-if=" postsByCate.length == 0 ">Empty</div>
 				<nav ng-show="isLoading">
 					<img src="/meanStarter/assets/img/loader.gif" alt="">
 				</nav>
-				<button ng-cloak ng-hide="isLoading || articles.length==0" type="button" class="btn search btn-primary btn-lg btn-block" ng-disabled="(articles.length) >= total" data-ng-click="loadMore()">
-					LOAD MORE ({{articles.length ? articles.length : 0}}/{{total ? total : 0}})
+				<button ng-cloak ng-hide="isLoading || postsByCate.length==0" type="button" class="btn search btn-primary btn-lg btn-block" ng-disabled="(postsByCate.length) >= totalByCate" data-ng-click="loadMoreByCategory()">
+					LOAD MORE ({{postsByCate.length ? postsByCate.length : 0}}/{{totalByCate ? totalByCate : 0}})
 				</button>
 			</div>
 			<div class="col-xs-12 col-sm-6 col-md-4">

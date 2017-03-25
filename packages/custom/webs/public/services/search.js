@@ -7,7 +7,7 @@
                 var deferred = $q.defer();
                 $http({
                   method: 'GET',
-                  url: '/api/search?key=' + key + '&text=' + value + '&page=' + (page ? page : '1') + '&limit=' + (limit ? limit : '10')
+                  url: '/api/search?key=' + key + '&text=' + value + '&page=' + (page ? page : '1') + '&limit=' + (limit ? limit : '5')
                 }).then(function successCallback(response) {
                   deferred.resolve(response);
                 }, function errorCallback(response) {

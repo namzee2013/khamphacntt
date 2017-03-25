@@ -38,7 +38,7 @@
             $scope.post.user_id = MeanUser.user._id;
             $scope.post.image = $scope.image;
             $scope.post.images = $scope.images;
-
+            $scope.post.author = MeanUser.user.name;
             Post.create($scope.post).then(function(response){
               if(response.status == 200){
                 $state.go('post')

@@ -28,11 +28,7 @@
                 $scope.total = response.data.total;
                 $scope.key = response.data.key;
               }
-
-            }, function (error) {
-                console.log('error', error);
-            }).finally(function () {
-                $scope.isLoading = false;
+            $scope.isLoading = false;
             });
         };
         $scope.loadMore = function () {
@@ -45,22 +41,9 @@
                 $scope.limit = response.data.limit;
                 $scope.total = response.data.total;
                 $scope.key = response.data.key;
-            }, function (error) {
-                console.log('error', error);
-            }).finally(function () {
-                $scope.isLoading = false;
             });
+            $scope.isLoading = false;
         };
-
-        $scope.editorOptions = {
-            lineWrapping : true,
-            lineNumbers: true,
-            readOnly: 'nocursor',
-            mode: 'xml',
-        };
-
-
-
 
     }
 

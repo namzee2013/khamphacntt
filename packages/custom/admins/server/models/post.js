@@ -113,5 +113,9 @@ postSchema.pre('update', function(next) {
 });
 
 postSchema.plugin(require('mongoose-paginate'));
-
 mongoose.model('Post', postSchema);
+// try {
+//   mongoose.model('Post')
+// } catch (error) {
+//   mongoose.model('Post', postSchema);
+// }

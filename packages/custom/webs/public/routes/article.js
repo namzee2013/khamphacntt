@@ -8,7 +8,6 @@
         })
         ;
     }
-
     angular
         .module('mean.webs')
         .config(Article);

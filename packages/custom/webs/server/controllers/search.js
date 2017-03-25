@@ -46,33 +46,33 @@ exports.search = function(req, res, next){
       res.json('author')
         break;
       default:
-      Post.paginate({
-        title: {
-          $regex: '.*' + req.query.text.replace(' ','|') + '.*'
-        },
-        published: 'Yes',
-        status: 'show'
-      }, {
-        select: {
-          title: 1,
-          slug: 1,
-          image: 1,
-          _id: 0
-        },
-        page: req.query.page,
-        limit: req.query.limit
-      }, function (err, post, pageCount, itemCount) {
-        if (err) return next(err);
-        pageCount = pageCount || 1;
-        res.json({
-          data: post.docs,
-          limit: post.limit,
-          page: post.page,
-          pages: post.pages,
-          total: post.total,
-          key: 'title'
+        Post.paginate({
+          title: {
+            $regex: '.*' + req.query.text.replace(' ','|') + '.*'
+          },
+          published: 'Yes',
+          status: 'show'
+        }, {
+          select: {
+            title: 1,
+            slug: 1,
+            image: 1,
+            _id: 0
+          },
+          page: req.query.page,
+          limit: req.query.limit
+        }, function (err, post, pageCount, itemCount) {
+          if (err) return next(err);
+          pageCount = pageCount || 1;
+          res.json({
+            data: post.docs,
+            limit: post.limit,
+            page: post.page,
+            pages: post.pages,
+            total: post.total,
+            key: 'title'
+          });
         });
-      });
     }
 
 }
