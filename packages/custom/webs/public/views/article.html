@@ -48,24 +48,17 @@
             <div class="comments-area" id="comments">
                 <div class="comment-respond" id="respond">
                     <h3 class="comment-reply-title" id="reply-title">Leave a reply</h3>
-                    <p class="must-log-in">You must be logged in to post a comment.</p>
-                    <form novalidate="" class="comment-form" id="commentform" method="post" action="#" />
-                    <p class="comment-form-author">
-                        <label for="author">Your Name:</label>
-                        <input id="author" name="author" type="text" value="" size="30" />
-                    </p>
-                    <p class="comment-form-email">
-                        <label for="email">Your Email:</label>
-                        <input id="email" name="email" type="text" value="" size="30" />
-                    </p>
-                    <p class="comment-form-comment">
-                        <label for="comment">Your Comment:</label>
-                        <textarea id="comment" name="comment" cols="45" rows="2" aria-required="true"></textarea>
-                    </p>
-                    <p class="form-submit">
-                        <label for="submit">Submit</label>
-                        <input name="submit" type="submit" id="submit" class="button medium primary rounded" value="Comment" />
-                    </p>
+
+                    <form novalidate="" class="comment-form" id="commentform" method="post" data-ng-submit="postComment(comment)"/>
+                      <p style="color: red" class="must-log-in" ng-show="isLogin === false">You must be logged in to post a comment.</p>
+                      <p class="comment-form-comment">
+                          <label for="comment">Your Comment:</label>
+                          <textarea id="comment" name="content" ng-model="comment.content" cols="45" rows="2" aria-required="true"></textarea>
+                      </p>
+                      <p class="form-submit">
+                          <label for="submit">Submit</label>
+                          <input name="submit" type="submit" id="submit" class="btn btn-primary" value="Comment" />
+                      </p>
                     </form>
                 </div>
 

@@ -72,12 +72,12 @@ var postSchema = new Schema({
     },
     next_new_id: {
         type: Schema.ObjectId,
-        ref: 'News',
+        ref: 'Post',
         default: null
     },
     previous_new_id: {
         type: Schema.ObjectId,
-        ref: 'News',
+        ref: 'Post',
         default: null
     },
     news_series_id: {

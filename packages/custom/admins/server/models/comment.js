@@ -21,10 +21,14 @@ var commentSchema = new Schema({
         unique: true,
         trim: true
     },
-    category_id: {
+    post_id: {
         type: Schema.ObjectId,
-        ref: 'Category',
+        ref: 'Post',
         default: null
+    },
+    user_id: {
+      type: Schema.ObjectId,
+      ref: 'User'
     }
 });
 

@@ -3,7 +3,7 @@
 
     /* jshint -W098 */
 
-    function ArticleController($scope, $rootScope, Global, Article, Series, $stateParams, $state, $location, $http) {
+    function ArticleController($scope, $rootScope, Global, Article, Series, Comments, $stateParams, $state, $location, $http, MeanUser) {
         $scope.global = Global;
         $scope.package = {
             name: 'search'
@@ -21,8 +21,33 @@
                   $scope.article = article;
                 });
                 Article.pushViewCount(article._id).then(function(response){});
+
+                Comments.getCommentByPost(article._id).then(function(response){
+                  if (response.status === 200) {
+                    console.log(response.data);
+                    $scope.comments = response.data;
+                  }else{
+                    $scope.hasComment = false;
+                  }
+                })
               }
             })
+        }
+        $scope.postComment = function(){
+
+          if (MeanUser.loggedin) {
+            $scope.comment.post_id = $scope.article._id;
+            $scope.comment.user_id = MeanUser.user._id;
+            //console.log($scope.comment);
+            Comments.postComment($scope.comment).then(function(response){
+              if (response.status === 200) {
+                console.log(response);
+              }
+            })
+            
+          }else{
+            $scope.isLogin = false;
+          }
         }
     }
 
@@ -30,6 +55,6 @@
         .module('mean.webs')
         .controller('ArticleController', ArticleController);
 
-    ArticleController.$inject = ['$scope', '$rootScope', 'Global', 'Article', 'Series', '$stateParams', '$state', '$location', '$http'];
+    ArticleController.$inject = ['$scope', '$rootScope', 'Global', 'Article', 'Series', 'Comments', '$stateParams', '$state', '$location', '$http', 'MeanUser'];
 
 })();

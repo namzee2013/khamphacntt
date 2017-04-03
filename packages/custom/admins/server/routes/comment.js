@@ -9,7 +9,8 @@
         var requiresAdmin = circles.controller.hasCircle('admin');
         var requiresLogin = circles.controller.hasCircle('authenticated');
 
-        // app.get('/api/comment', comment.findAll);
+        app.get('/api/comment-post/:post_id', comment.findCommetnByPost);
+        app.post('/api/comment', comment.create);
 
     };
 })();
