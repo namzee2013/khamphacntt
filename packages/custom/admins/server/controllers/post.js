@@ -72,6 +72,20 @@ exports.getPostBySeries = function(req, res){
     })
 }
 
+exports.getPostTop10 = function(req, res, next){
+  var query = [
+    {$limit: 10},
+    {$sort: {view_count: -1}}
+  ];
+  Post.aggregate(query, function(err, data){
+    if (err) {
+      res.json(err);
+    }else {
+      res.json(data);
+    }
+  })
+}
+
 exports.getPostBySlug = function(req, res, next){
     Post.findOne({slug: req.params.slug}, function(err, data){
         if(err) res.json(err)

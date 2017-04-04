@@ -50,6 +50,18 @@
                 deferred.reject(response);
               });
               return deferred.promise;
+            },
+            top10Post: function(){
+              var deferred = $q.defer();
+              $http({
+                method: 'GET',
+                url: '/api/post/top-10/orderby'
+              }).then(function successCallback(response) {
+                deferred.resolve(response);
+              }, function errorCallback(response) {
+                deferred.reject(response);
+              });
+              return deferred.promise;
             }
 
         };

@@ -116,6 +116,13 @@
             });
             $scope.isLoading = false;
         }
+        $scope.top10Post = function(){
+          Welcome.top10Post().then(function(response){
+            if (response.status === 200) {
+              $scope.top10posts = response.data;
+            }
+          })
+        }
     }
     angular
         .module('mean.webs')
