@@ -61,41 +61,27 @@
                       </p>
                     </form>
                 </div>
-
-                <h3 class="comments-title">2 Comments</h3>
-                <ol class="comment-list">
-                    <li class="comment">
-                        <div class="comment-body">
-                            <div class="comment-avatar">
-                                <img class="avatar" src="" alt="" />
-                            </div>
-                            <header class="comment-meta">
-                                <cite class="comment-author"><a href="#">Julia Anna</a></cite>
-                                <span class="comment-date">- Feb 25, 2016</span>
-                            </header>
-                            <div class="comment-content comment">
-                                <p>Nunc risus ex, tempus quis purus ac, tempor consequat ex. Vivamus sem magna, maximus at est id, maximus aliquet
-                                    nunc.
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="comment">
-                        <div class="comment-body">
-                            <div class="comment-avatar">
-                                <img class="avatar" src="" alt="" />
-                            </div>
-                            <header class="comment-meta">
-                                <cite class="comment-author"><a href="#">John Doe</a></cite>
-                                <span class="comment-date">- Feb 22, 2016</span>
-                            </header>
-                            <div class="comment-content comment">
-                                <p>Quisque rhoncus turpis sit amet turpis faucibus, at condimentum ipsum aliquam. Morbi pulvinar lorem vitae magna
-                                    dapibus ultrices.</p>
-                            </div>
-                        </div>
-                    </li>
-                </ol>
+                <div ng-if="totalComment > 0" class="list-comment">
+                  <h3 class="comments-title">{{totalComment}} Comments</h3>
+                  <ol class="comment-list">
+                      <li class="comment" ng-repeat="item in comments">
+                          <div class="comment-body">
+                              <div class="comment-avatar">
+                                  <img class="avatar" src="" alt="" />
+                              </div>
+                              <header class="comment-meta">
+                                  <cite class="comment-author"><a href="#">{{item.user[0].name}}</a></cite>
+                                  <span class="comment-date">- {{item.created | date:"dd/MM/yyyy"}}</span>
+                              </header>
+                              <div class="comment-content comment">
+                                  <p>
+                                    {{item.content}}
+                                  </p>
+                              </div>
+                          </div>
+                      </li>
+                  </ol>
+                </div>
             </div>
         </div>
     </div>

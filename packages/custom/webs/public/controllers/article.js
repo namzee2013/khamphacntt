@@ -24,10 +24,18 @@
 
                 Comments.getCommentByPost(article._id).then(function(response){
                   if (response.status === 200) {
-                    console.log(response.data);
-                    $scope.comments = response.data;
-                  }else{
-                    $scope.hasComment = false;
+                    $scope.totalComment = response.data.length;
+                    var comments = response.data;
+                    angular.forEach(comments, function(value, key){
+                      Comments.getUserById(value.user_id).then(function(response){
+                        if (response.status === 200) {
+                          value.user = response.data;
+                        }
+                      })
+                    }, this);
+                    $scope.comments = comments;
+                    //console.log($scope.comments);
+                    //console.log($scope.totalComment);
                   }
                 })
               }
@@ -44,7 +52,7 @@
                 console.log(response);
               }
             })
-            
+
           }else{
             $scope.isLogin = false;
           }

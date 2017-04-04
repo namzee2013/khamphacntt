@@ -11,6 +11,7 @@
 
         app.get('/api/comment-post/:post_id', comment.findCommetnByPost);
         app.post('/api/comment', comment.create);
+        app.get('/api/user/:id', comment.getUserById);
 
     };
 })();

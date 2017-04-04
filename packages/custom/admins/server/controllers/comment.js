@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
     Comment = mongoose.model('Comment'),
+    User = mongoose.model('User'),
     _ = require('lodash');
 
 exports.findCommetnByPost = function(req, res, next){
@@ -25,6 +26,16 @@ exports.create = function(req, res, next){
           return res.json(err);
       }else{
         res.json(newComment);
+      }
+
+  })
+}
+exports.getUserById = function(req, res, next){
+  User.find({_id: req.params.id}, function(err, data){
+      if(err){
+          return res.json(err);
+      }else{
+        res.json(data);
       }
 
   })
