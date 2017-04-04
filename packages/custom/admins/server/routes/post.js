@@ -25,6 +25,8 @@
 
         app.get('/api/post/top-10/orderby', post.getPostTop10);
 
+        app.get('/api/post/top-10/series/:news_series_id', post.findTop10PostBySeries);
+
         app.get('/api/post/slug/:slug', post.getPostBySlug);
 
         app.get('/api/post/view-count/:id', post.pushViewCount);

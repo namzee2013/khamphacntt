@@ -86,61 +86,14 @@
         </div>
     </div>
     <div class="col-xs-12 col-sm-6 col-md-4">
-        <div class="rightBox">
-            <h2 class="headerControls">Series
+        <div class="rightBox" ng-if="top10postbyseries.length > 0">
+            <h2 class="headerControls">Top Post of {{ article.series[0].name }}
                 <a href="#" id="ctl00_RightBar_TrendingUp1_RssEnabledImageButton" class="headerRss" target="_blank"></a>
             </h2>
             <ul class="trendingBox cl-effect-1" id="cl-effect-1">
-                <li class="current">
-                    <span class="numbers">01</span>
-                    <div class="trendingDetail"> <a href="#">Tips For Writing Clean And Concise Code In C#</a>
-                    </div>
-                </li>
-                <li>
-                    <span class="numbers">02</span>
-                    <div class="trendingDetail"> <a href="#">Creating Web API With Repository Pattern And Dependency Injection</a>
-                    </div>
-                </li>
-                <li>
-                    <span class="numbers">03</span>
-                    <div class="trendingDetail"> <a href="#">Web Scraping In C#</a>
-                    </div>
-                </li>
-                <li>
-                    <span class="numbers">04</span>
-                    <div class="trendingDetail"> <a href="#">Transaction In .NET</a>
-                    </div>
-                </li>
-                <li>
-                    <span class="numbers">05</span>
-                    <div class="trendingDetail"> <a href="#">
-                    Developing BookMySeat Application In AngularJS And ASP.NET - BookMySeat Page Layout , Angular Services And Custom Directive - Part Five</a>
-                    </div>
-                </li>
-                <li>
-                    <span class="numbers">06</span>
-                    <div class="trendingDetail"> <a href="#">jQuery Based AJAX ASP.NET MVC Google Maps Web App</a>
-                    </div>
-                </li>
-                <li>
-                    <span class="numbers">07</span>
-                    <div class="trendingDetail"> <a href="#">
-                    Getting Started With Visual Studio 2017 Enterprise RC</a>
-                    </div>
-                </li>
-                <li>
-                    <span class="numbers">08</span>
-                    <div class="trendingDetail"> <a href="#">An Overview Of Polymorphism, Inheritance And Encapsulation In OOP</a>
-                    </div>
-                </li>
-                <li>
-                    <span class="numbers">09</span>
-                    <div class="trendingDetail"> <a href="#">Build Domain Controller With AD Tenants In Azure</a>
-                    </div>
-                </li>
-                <li>
-                    <span class="numbers">10</span>
-                    <div class="trendingDetail"> <a href="#">Introduction To ASP.NET Core, WEB API And Repository Class- Part One </a>
+                <li ng-repeat="(key, value) in top10postbyseries" ng-class="{ 'current' : value._id == article._id }"  >
+                    <span class="numbers">{{key+1}}</span>
+                    <div class="trendingDetail"> <a href="#" ui-sref="article({slug:value.slug})" >{{value.title}}</a>
                     </div>
                 </li>
             </ul>

@@ -13,6 +13,11 @@
             Article.getArticle($stateParams.slug).then(function(response){
               if(response.status == 200){
                 var article = response.data;
+                Article.top10ViewPostBySeries(article.news_series_id).then(function(response){
+                  if (response.status === 200) {
+                    $scope.top10postbyseries = response.data;
+                  }
+                })
                 $rootScope.$title = article.title;
                 Series.find(article.news_series_id).then(function(response){
                   if (response.status == 200) {

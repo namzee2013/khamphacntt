@@ -107,5 +107,16 @@ exports.pushViewCount = function(req, res, next){
         }
     });
   });
-
+}
+exports.findTop10PostBySeries = function(req, res, next){
+  var news_series_id = req.params.news_series_id;
+  Post.find({news_series_id: news_series_id}, function(err, data){
+    if (err) {
+      res.json(err);
+    }else {
+      data.sort(function(a,b){return a['view_count'] - b['view_count']});
+      data.reverse();
+      res.json(data.slice(0,10));
+    }
+  })
 }
