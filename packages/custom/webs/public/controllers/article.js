@@ -51,10 +51,21 @@
           if (MeanUser.loggedin) {
             $scope.comment.post_id = $scope.article._id;
             $scope.comment.user_id = MeanUser.user._id;
-            //console.log($scope.comment);
+
             Comments.postComment($scope.comment).then(function(response){
               if (response.status === 200) {
-                console.log(response);
+                var comments = response.data;
+                Comments.getUserById(comments.user_id).then(function(response){
+                  if (response.status === 200) {
+                    comments.user = response.data;
+                    if ($scope.comments.length > 0) {
+                      $scope.comments = [].concat($scope.comments, comments);
+                    }else {
+                      $scope.comments = [].concat([], comments);
+                    }
+                    $scope.totalComment = $scope.comments.length;
+                  }
+                });
               }
             })
 
