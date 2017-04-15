@@ -9,13 +9,13 @@
             cb(null, './files/uploads/details')
         },
         filename: function (req, file, cb) {
-            cb(null, slug(Date.now()+ '-' +file.originalname))
+            cb(null, Date.now()+ '-' +file.originalname)
         }
     });
     var upload = multer({ storage: storage });
     /* jshint -W098 */
     // The Package is past automatically as first parameter
-    module.exports = function(Webadmin, app, auth, database, circles) {
+    module.exports = function(Admins, app, auth, database, circles) {
 
         var requiresAdmin = circles.controller.hasCircle('admin');
         var requiresLogin = circles.controller.hasCircle('authenticated');
