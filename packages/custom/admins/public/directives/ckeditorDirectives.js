@@ -6,6 +6,7 @@ angular
     require: '?ngModel',
     link: function (scope, elm, attr, ngModel) {
       var ck = CKEDITOR.replace(elm[0]);
+      CKFinder.setupCKEditor(ck);
       if (!ngModel) return;
       ck.on('instanceReady', function () {
         ck.setData(ngModel.$viewValue);

@@ -44,6 +44,18 @@
               });
               return deferred.promise;
             },
+            findHide: function(){
+              var deferred = $q.defer();
+              $http({
+                method: 'GET',
+                url: '/api/post/status/hide',
+              }).then(function successCallback(response) {
+                deferred.resolve(response);
+              }, function errorCallback(response) {
+                deferred.reject(response);
+              });
+              return deferred.promise;
+            },
             update: function(id, data){
               var deferred = $q.defer();
               $http({
@@ -65,6 +77,18 @@
               $http({
                 method: 'DELETE',
                 url: '/api/post/' + id,
+              }).then(function successCallback(response) {
+                deferred.resolve(response);
+              }, function errorCallback(response) {
+                deferred.reject(response);
+              });
+              return deferred.promise;
+            },
+            published: function(id){
+              var deferred = $q.defer();
+              $http({
+                method: 'GET',
+                url: '/api/post/status/hide/published/' + id,
               }).then(function successCallback(response) {
                 deferred.resolve(response);
               }, function errorCallback(response) {

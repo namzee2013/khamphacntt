@@ -94,6 +94,26 @@
             $scope.sortKey = keyname;   //set the sortKey to the param passed
             $scope.reverse = !$scope.reverse; //if true make it false and vice versa
         };
+        $scope.findHide = function(){
+          Post.findHide().then(function(response){
+            if (response.status === 200) {
+              $scope.hidePosts = response.data;
+            }
+          })
+        }
+        $scope.published = function(post){
+          if ($window.confirm('Please confirm?')) {
+            Post.published(post._id).then(function(response){
+              if (response.status == 200) {
+                $state.transitionTo($state.current, $stateParams, {
+                  reload: true,
+                  inherit: false,
+                  notify: true
+                });
+              }
+            })
+          }
+        }
 
     }
     angular

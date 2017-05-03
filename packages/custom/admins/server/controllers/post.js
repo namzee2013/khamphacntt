@@ -30,7 +30,7 @@ exports.create = function(req, res){
 exports.edit = function(req, res){
     Post.findOne({_id: req.params.id}, function(err, data){
         if(err){
-            return res.send(500);
+            return res.json(err);
         }
         res.json(data);
     })
@@ -75,7 +75,8 @@ exports.getPostBySeries = function(req, res){
 exports.getPostTop10 = function(req, res, next){
   var query = [
     {$limit: 10},
-    {$sort: {view_count: -1}}
+    {$sort: {view_count: -1}},
+    {$match: { status: "show" }}
   ];
   Post.aggregate(query, function(err, data){
     if (err) {
@@ -110,7 +111,7 @@ exports.pushViewCount = function(req, res, next){
 }
 exports.findTop10PostBySeries = function(req, res, next){
   var news_series_id = req.params.news_series_id;
-  Post.find({news_series_id: news_series_id}, function(err, data){
+  Post.find({news_series_id: news_series_id, status: 'show'}, function(err, data){
     if (err) {
       res.json(err);
     }else {
@@ -119,4 +120,27 @@ exports.findTop10PostBySeries = function(req, res, next){
       res.json(data.slice(0,10));
     }
   })
+}
+exports.findHide = function(req, res, next){
+  Post.find({status: 'hide'}, function(err, data){
+      if(err){
+          return res.json(err);
+      }
+      res.json(data);
+  })
+}
+
+exports.published = function(req, res, next){
+  Post.findOne({_id: req.params.id}, function(err, data){
+    var post = data;
+    post.status = 'show';
+    var query = {_id: post._id};
+    Post.findOneAndUpdate(query, post, function(err) {
+        if (err) {
+            return res.send(err);
+        } else {
+            res.json(post);
+        }
+    });
+  });
 }

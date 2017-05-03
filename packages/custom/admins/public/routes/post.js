@@ -20,6 +20,9 @@
             requiredCircles: {
                 circles: ['admin']
             }
+        }).state('post publish', {
+          url: '/admin/post/publish',
+          templateUrl: 'admins/views/post/publish.html'
         })
         ;
     }

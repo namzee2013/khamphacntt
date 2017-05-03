@@ -36,6 +36,12 @@ Admins.register(function(app, auth, database, circles) {
     roles: ['admin'],
     menu: 'admin'
   });
+  Admins.menus.add({
+    title: 'publish',
+    link: 'post publish',
+    roles: ['admin'],
+    menu: 'admin'
+  });
 
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above

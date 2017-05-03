@@ -9,15 +9,15 @@
         var requiresAdmin = circles.controller.hasCircle('admin');
         var requiresLogin = circles.controller.hasCircle('authenticated');
 
-        app.get('/api/post', requiresAdmin, post.findAll);
+        app.get('/api/post', requiresLogin, post.findAll);
 
-        app.post('/api/post', requiresAdmin, post.create);
+        app.post('/api/post', requiresLogin, post.create);
 
         app.get('/api/post/:id', post.edit);
 
-        app.put('/api/post/:id', requiresAdmin, post.update);
+        app.put('/api/post/:id', requiresLogin, post.update);
 
-        app.delete('/api/post/:id', requiresAdmin, post.delete);
+        app.delete('/api/post/:id', requiresLogin, post.delete);
 
         app.get('/api/post/category/:category_id', post.getPostByCategory);
 
@@ -30,5 +30,9 @@
         app.get('/api/post/slug/:slug', post.getPostBySlug);
 
         app.get('/api/post/view-count/:id', post.pushViewCount);
+
+        app.get('/api/post/status/hide', post.findHide);
+
+        app.get('/api/post/status/hide/published/:id', post.published);
     };
 })();

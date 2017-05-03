@@ -45,7 +45,7 @@ module.exports = function (app, db) {
   app.use('/bower_components', express.static(config.root + '/bower_components'))
   app.use('/custom_libs', express.static(config.root + '/custom_libs'))
   app.use('/bundle', express.static(config.root + '/bundle'))
-
+  app.use('/ckfinder', express.static(config.root + '/ckfinder'))
   // Adds logging based on logging config in config/env/ entry
   require('./middlewares/logging')(app, config.logging)
 
