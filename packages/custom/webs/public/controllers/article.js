@@ -11,20 +11,27 @@
 
         $scope.getArticle = function(){
             Article.getArticle($stateParams.slug).then(function(response){
-              if(response.status == 200){
+              if(response.data === null){
+                $state.go('home');
+              }else {
                 var article = response.data;
-                Article.top10ViewPostBySeries(article.news_series_id).then(function(response){
-                  if (response.status === 200) {
-                    $scope.top10postbyseries = response.data;
-                  }
-                })
                 $rootScope.$title = article.title;
-                Series.find(article.news_series_id).then(function(response){
-                  if (response.status == 200) {
-                    article.series.push(response.data);
-                  }
-                  $scope.article = article;
-                });
+                if (article.news_series_id) {
+                  Article.top10ViewPostBySeries(article.news_series_id).then(function(response){
+                    if (response.status === 200) {
+                      $scope.top10postbyseries = response.data;
+                    }
+                  });
+                  Series.find(article.news_series_id).then(function(response){
+                    if (response.status == 200) {
+                      article.series.push(response.data);
+                    }
+                  });
+                }else {
+                  $scope.top10postbyseries = [];
+                }
+                $scope.article = article;
+
                 Article.pushViewCount(article._id).then(function(response){});
 
                 Comments.getCommentByPost(article._id).then(function(response){
@@ -42,7 +49,8 @@
                     //console.log($scope.comments);
                     //console.log($scope.totalComment);
                   }
-                })
+                });
+
               }
             })
         }

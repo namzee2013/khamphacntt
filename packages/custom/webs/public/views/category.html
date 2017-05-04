@@ -10,7 +10,7 @@
 								<a ui-sref="article({slug:item.slug})" href="#">{{ item.title }}<img ng-if="item.new==='new'" style="width:40px; margin-bottom:20px;" src="/meanStarter/assets/img/new.gif" alt="">  </a>
 							</h1>
 							<h2>
-								Tác giả: <span class="tacgia"> {{ item.author }} </span> Ngày: {{ item.created_at | date:"dd/MM/yyyy" }} Series: <span class="series"><a href="">{{ item.series[0].name }}</a> </span>View: {{ item.view_count }}
+								Tác giả: <span class="tacgia"> {{ item.author }} </span> Ngày: {{ item.created_at | date:"dd/MM/yyyy" }} Series: <span ng-hide="item.news_series_id">NULL</span><span ng-show="item.news_series_id" class="series"><a href="">{{ item.series[0].name }}</a> </span>View: {{ item.view_count }}
 							</h2>
 						</div>
 					</section>

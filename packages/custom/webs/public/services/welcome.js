@@ -19,7 +19,7 @@
                 var deferred = $q.defer();
                 $http({
                   method: 'GET',
-                  url: '/api/post-category-paginate?textp=' + category_id + '&pagep=' + (page ? page : '1') + '&limitp=' + (limit ? limit : '5')
+                  url: '/api/post-category-paginate?textca=' + category_id + '&pageca=' + (page ? page : '1') + '&limitca=' + (limit ? limit : '5')
                 }).then(function successCallback(response) {
                   deferred.resolve(response);
                 }, function errorCallback(response) {

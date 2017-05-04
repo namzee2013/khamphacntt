@@ -94,6 +94,7 @@
           })
         }
         $scope.update = function(){
+          $scope.post.status = 'hide';
           $scope.post.updated_at = Date.now;
           $scope.post.image = $scope.image;
           for(var i in $scope.images)

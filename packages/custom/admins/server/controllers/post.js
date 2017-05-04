@@ -88,7 +88,7 @@ exports.getPostTop10 = function(req, res, next){
 }
 
 exports.getPostBySlug = function(req, res, next){
-    Post.findOne({slug: req.params.slug}, function(err, data){
+    Post.findOne({slug: req.params.slug, status: 'show'}, function(err, data){
         if(err) res.json(err)
         res.json(data);
     })

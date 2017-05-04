@@ -7,9 +7,10 @@ var mongoose = require('mongoose'),
     Post = mongoose.model('Post');
 
 exports.getPostByCategory = function(req, res, next){
-  var page = parseInt(req.query.pagep);
-  var limit = parseInt(req.query.limitp);
-  var category_id = req.query.textp;
+  var page = parseInt(req.query.pageca);
+  var limit = parseInt(req.query.limitca);
+  var category_id = req.query.textca;
+
   Post.paginate({
     category_id: category_id,
     published: 'Yes',

@@ -14,17 +14,22 @@
             $rootScope.$title = 'Bài viết theo danh mục';
             $scope.isLoading = true;
             Welcome.getCategoryBySlug($stateParams.slug).then(function(response){
-                var _id = response.data._id;
-                Welcome.getPostByCategory(_id, page, limit).then(function(response){
 
+                var id = response.data._id;
+                Welcome.getPostByCategory(id, page, limit).then(function(response){
+
+                  if (response.data.total === 0) {
+                    $scope.postsByCate = [];
+                  }else {
                     $scope.pageByCate = response.data.page;
                     $scope.pagesByCate = response.data.pages;
                     $scope.limit = response.data.limit;
-                    $scope.category_id = _id;
+                    $scope.category_id = id;
                     $scope.totalByCate = response.data.total;
 
                     var postsByCate = response.data.data;
                     angular.forEach(postsByCate, function(value, key) {
+                      if (value.news_series_id) {
                         Series.find(value.news_series_id).then(function(response){
                             value.series.push(response.data);
                             var newDay = Date.now()-Date.parse(value.created_at);
@@ -32,8 +37,10 @@
                               value.new = 'new';
                             }
                         })
+                      }
                     }, this);
                     $scope.postsByCate = postsByCate;
+                  }
                 });
             });
             $scope.isLoading = false;
@@ -50,6 +57,7 @@
 
                 var postsByCate = response.data.data;
                 angular.forEach(postsByCate, function(value, key) {
+                  if (value.news_series_id) {
                     Series.find(value.news_series_id).then(function(response){
                         value.series.push(response.data);
                         var newDay = Date.now()-Date.parse(value.created_at);
@@ -57,6 +65,8 @@
                           value.new = 'new';
                         }
                     })
+                  }
+
                 }, this);
 
                 $scope.postsByCate = [].concat($scope.postsByCate, postsByCate);

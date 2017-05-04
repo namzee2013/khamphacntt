@@ -107,7 +107,7 @@
 		              <div class="form-group" ng-class="{ 'has-error' : CreatePost.news_series_id.$invalid }">
 		                  <label class="col-md-2 col-xs-12 control-label text-right">Series</label>
 		                  <div class="col-md-8 col-xs-12">
-		                      <select class="form-control select" name="news_series_id" required ng-init="findSeries();" ng-model="post.news_series_id">
+		                      <select class="form-control select" name="news_series_id" ng-init="findSeries();" ng-model="post.news_series_id">
 		                          <option value="" selected>--Please select series--</option>
 		                          <option ng-repeat="item in series" value="{{ item._id }}">{{ item.name }}</option>
 		                      </select>
