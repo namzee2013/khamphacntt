@@ -1,0 +1,69 @@
+<div class="page-inner" layout="column" flex data-ng-controller="UserController" >
+    <div class="row">
+    <div class="col-md-12">
+    	            <!-- Advanced Tables -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Danh sách User
+                </div>
+                <div class="panel-body">
+                    <form class="form-inline pull-right">
+                    <div class="form-group">
+                        <label >Search</label>
+                        <input type="text" ng-model="search" class="form-control" placeholder="Search">
+                    </div>
+                    </form>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                    	<table ng-init="findAll()" class="table table-bordered table-striped table-actions">
+                            <thead>
+                                <tr>
+                                    <th ng-click="sort('id')">id
+                                        <span class="glyphicon sort-icon" ng-show="sortKey=='id'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                    </th>
+                                    <th ng-click="sort('name')">name
+                                        <span class="glyphicon sort-icon" ng-show="sortKey=='name'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                    </th>
+                                    <th ng-click="sort('email')">email
+                                        <span class="glyphicon sort-icon" ng-show="sortKey=='email'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                    </th>
+                                    <th ng-click="sort('roles')">roles
+                                        <span class="glyphicon sort-icon" ng-show="sortKey=='roles'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                    </th>
+                                    <th ng-click="sort('categories')">categories
+                                        <span class="glyphicon sort-icon" ng-show="sortKey=='categories'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                    </th>
+                                    <th ng-click="sort('series')">series
+                                        <span class="glyphicon sort-icon" ng-show="sortKey=='series'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                                    </th>
+                                    <th>actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr dir-paginate="item in users|orderBy:sortKey:reverse|filter:search|itemsPerPage:5">
+                                    <td>{{ item._id }}</td>
+                                    <td><strong>{{ item.name }}</strong></td>
+                                    <td>{{ item.email }}</td>
+                                    <td>{{ item.roles }}</td>
+                                    <td>{{ item.categories }}</td>
+                                    <td>{{ item.series }}</td>
+                                    <td>
+                                        <button ng-click="access(item);" class="btn btn-default btn-rounded btn-sm"><span class="fa fa-pencil"></span></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="panel-body">
+                  <dir-pagination-controls
+          					max-size="5"
+          					direction-links="true"
+          					boundary-links="true" >
+          				</dir-pagination-controls>
+                </div>
+            </div>
+    </div>
+    </div>
+</div>

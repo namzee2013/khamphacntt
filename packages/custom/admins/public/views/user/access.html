@@ -1,0 +1,52 @@
+<div class="page-inner" layout="column" flex data-ng-controller="UserController" data-ng-init="findOne()">
+    <div class="row">
+    	<div class="col-md-12">
+            <!-- Advanced Tables -->
+            <div class="panel panel-default">
+				<div class="panel-heading">
+             Cập nhật bài viết: <strong>{{user.email}}</strong>
+        </div>
+				<form name="UserPost" data-ng-submit="update(user)" class="form-horizontal" >
+					<div class="panel-body">
+
+
+						<div class="row">
+							<div class="form-group">
+								<label class="col-md-2 col-xs-12 control-label text-right">Category</label>
+								<div class="col-md-8 col-xs-12">
+                  <md-select ng-model="user.categories" multiple placeholder="categories">
+                    <md-option ng-repeat="item in categories" value="{{item._id}}">
+                      {{item.name}}
+                    </md-option>
+                  </md-select>
+								</div>
+							</div>
+						</div>
+
+
+            <div class="row">
+							<div class="form-group">
+								<label class="col-md-2 col-xs-12 control-label text-right">Series</label>
+								<div class="col-md-8 col-xs-12">
+                  <md-select ng-model="user.series" multiple placeholder="series">
+                    <md-option ng-repeat="item in series" value="{{item._id}}">
+                      {{item.name}}
+                    </md-option>
+                  </md-select>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+					<div class="panel-footer">
+						<div class="col-md-offset-2">
+							<button type="submit" ng-disabled="UserPost.$invalid" class="btn btn-primary">Submit</button>
+						</div>
+					</div>
+				</form>
+            </div>
+
+        </div>
+    </div>
+</div>

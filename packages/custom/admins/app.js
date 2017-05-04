@@ -13,6 +13,17 @@ var Admins = new Module('admins');
  * Dependency injection is used to define required modules
  */
 Admins.register(function(app, auth, database, circles) {
+  var userModel = database.connection.model('User');
+  userModel.schema.add({
+    categories:{
+      type: Array,
+      default: []
+    },
+    series:{
+      type: Array,
+      default: []
+    }
+  });
 
   //We enable routing. By default the Package Object is passed to the routes
   Admins.routes(app, auth, database, circles);
@@ -42,7 +53,12 @@ Admins.register(function(app, auth, database, circles) {
     roles: ['admin'],
     menu: 'admin'
   });
-
+  Admins.menus.add({
+    title: 'access for user',
+    link: 'access for user index',
+    roles: ['admin'],
+    menu: 'admin'
+  })
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above
     // Save settings with callback
