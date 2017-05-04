@@ -23,28 +23,62 @@
         }
         $scope.create = function()
         {
-          $scope.post.status = 'hide';
-          $scope.post.user_id = MeanUser.user._id;
-          $scope.post.image = $scope.image;
-          $scope.post.images = $scope.images;
-          $scope.post.author = MeanUser.user.name;
-          Post.create($scope.post).then(function(response){
-            if(response.status == 200){
-              $state.go('memberpost')
+
+          var flag = false;
+          angular.forEach(MeanUser.user.categories, function(value, key){
+              if (value === $scope.post.category_id) {
+                flag = true;
+              }
+          }, this);
+          angular.forEach(MeanUser.user.series, function(value, key){
+            if (value === $scope.post.news_series_id) {
+              flag = true;
             }
-          })
+          });
+          if (flag) {
+            $scope.post.status = 'hide';
+            $scope.post.user_id = MeanUser.user._id;
+            $scope.post.image = $scope.image;
+            $scope.post.images = $scope.images;
+            $scope.post.author = MeanUser.user.name;
+            Post.create($scope.post).then(function(response){
+              if(response.status == 200){
+                $state.go('memberpost')
+              }
+            })
+          }else {
+            $state.go('memberpost');
+          }
+
         }
         $scope.findSeries = function(){
           Series.index().then(function(response){
             if (response.status == 200) {
-              $scope.series = response.data;
+              $scope.series = [];
+              var series = response.data;
+              angular.forEach(MeanUser.user.series, function(valueSeries, keySeries){
+                angular.forEach(series, function(value, key){
+                  if (valueSeries === value._id) {
+                    $scope.series.push(value);
+                  }
+                }, this);
+              }, this);
             }
           })
         }
         $scope.findCategory = function(){
           Category.findCate().then(function(response){
             if (response.status == 200) {
-              $scope.cates = response.data;
+              // $scope.cates = response.data;
+              $scope.cates = [];
+              var cates = response.data;
+              angular.forEach(MeanUser.user.categories, function(valueCategory, keyCategory){
+                angular.forEach(cates, function(value, key){
+                  if (valueCategory === value._id) {
+                    $scope.cates.push(value);
+                  }
+                }, this);
+              }, this);
             }
           })
         }
