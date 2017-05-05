@@ -3,8 +3,10 @@
     	<div class="col-md-12">
             <!-- Advanced Tables -->
             <div class="panel panel-default">
+
 				<div class="panel-heading">
-             Cập nhật bài viết: <strong>{{user.email}}</strong>
+          <a ui-sref="access for user index" href="#">Quay lại </a>
+          | Cập nhật quyền cho User: <strong>{{user.email}}</strong>
         </div>
 				<form name="UserPost" data-ng-submit="update(user)" class="form-horizontal" >
 					<div class="panel-body">
