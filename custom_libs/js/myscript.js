@@ -1,3 +1,11 @@
+$(function() {
+	$('#main-menu').smartmenus({
+		subMenusSubOffsetX: 1,
+		subMenusSubOffsetY: -8
+	});
+	$('#main-menu').smartmenus('keyboardSetHotkey', 123, 'shiftKey');
+});
+
 $(document).ready(function () {
 	var stickyNavTop = $('#main-nav').offset().top;
 
@@ -15,12 +23,4 @@ $(document).ready(function () {
 	$(window).scroll(function () {
 		stickyNav();
 	});
-});
-
-$(function() {
-	$('#main-menu').smartmenus({
-		subMenusSubOffsetX: 1,
-		subMenusSubOffsetY: -8
-	});
-	$('#main-menu').smartmenus('keyboardSetHotkey', 123, 'shiftKey');
 });
