@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = {
-  db: 'mongodb://' + (process.env.DB_PORT_27017_TCP_ADDR || 'localhost') + '/khamphacntt-prod',
+  db: 'mongodb://thanhnam:1@ds119020.mlab.com:19020/khamphacntt',
   /**
    * Database options that will be passed directly to mongoose.connect
    * Below are some examples.
