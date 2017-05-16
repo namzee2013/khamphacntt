@@ -1,5 +1,50 @@
-<div layout="column" flex data-ng-controller="IndexController">
+<div layout="column" flex data-ng-controller="IndexController" ng-init="getAllPost();top10Post()">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-8">
+      <article ng-if="postsByCate" ng-repeat="item in postsByCate">
+        <section class="animated fadeInUp">
+          <img ng-if="item.image" class="bieutuong" ng-src="/api/files/uploads/{{item.image}}" height="50" width="50" alt="">
+          <div class="header-article">
 
+            <h1>
+              <a ui-sref="article({slug:item.slug})" href="#">{{ item.title }}<img ng-if="item.new==='new'" style="width:40px; margin-bottom:20px;" src="/meanStarter/assets/img/new.gif" alt="">  </a>
+            </h1>
+            <h2>
+              Tác giả: <span class="tacgia"> {{ item.author }} </span> Ngày: {{ item.created_at | date:"dd/MM/yyyy" }} Series: <span ng-hide="item.news_series_id">NULL</span><span ng-show="item.news_series_id" class="series"><a href="">{{ item.series[0].name }}</a> </span>View: {{ item.view_count }}
+            </h2>
+          </div>
+        </section>
+        <section ng-right-click class="clearfix animated fadeInUp">
+            <div bind-html-compile="item.description">
+                      </div>
+
+        </section>
+      </article>
+
+      <div ng-if=" postsByCate.length == 0 ">Empty</div>
+      <nav ng-show="isLoading">
+        <img src="/meanStarter/assets/img/loader.gif" alt="">
+      </nav>
+      <button ng-cloak ng-hide="isLoading || postsByCate.length==0" type="button" class="btn search btn-primary btn-lg btn-block" ng-disabled="(postsByCate.length) >= totalByCate" data-ng-click="loadMoreByCategory()">
+        LOAD MORE ({{postsByCate.length ? postsByCate.length : 0}}/{{totalByCate ? totalByCate : 0}})
+      </button>
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <div class="rightBox animated fadeInUp" ng-if="top10posts.length > 0">
+        <h2 class="headerControls animated fadeInUp">xu hướng
+          <a href="#" id="ctl00_RightBar_TrendingUp1_RssEnabledImageButton" class="headerRss" target="_blank"></a>
+        </h2>
+        <ul class="trendingBox animated fadeInUp cl-effect-1" id="cl-effect-1">
+          <li ng-repeat="(key, value) in top10posts">
+            <span class="numbers">{{key+1}}</span>
+            <div class="trendingDetail"> <a href="#" ui-sref="article({slug:value.slug})" >{{value.title}}</a>
+            </div>
+          </li>
+        </ul>
+        <a href="#" class="viewAllLink">View All <i class="glyphicon glyphicon-chevron-right"></i></a>
+      </div>
+    </div>
+  </div>
 
    <md-fab-toolbar  md-open="false" count="0" md-direction="left">
       <md-fab-trigger class="align-with-text">

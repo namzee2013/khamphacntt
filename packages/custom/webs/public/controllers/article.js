@@ -74,6 +74,7 @@
                     $scope.totalComment = $scope.comments.length;
                   }
                 });
+                $scope.comment.content = '';
               }
             })
 

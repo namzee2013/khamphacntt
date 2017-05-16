@@ -62,6 +62,18 @@
                 deferred.reject(response);
               });
               return deferred.promise;
+            },
+            getAllPost: function(page, limit){
+              var deferred = $q.defer();
+              $http({
+                method: 'GET',
+                url: '/api/post-all-paginate?pageall=' + (page ? page : '1') + '&limitall=' + (limit ? limit : '5')
+              }).then(function successCallback(response) {
+                deferred.resolve(response);
+              }, function errorCallback(response) {
+                deferred.reject(response);
+              });
+              return deferred.promise;
             }
 
         };
