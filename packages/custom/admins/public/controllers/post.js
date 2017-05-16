@@ -58,6 +58,23 @@
           })
         }
 
+        $scope.getPostReview = function()
+        {
+          Post.find($stateParams.id).then(function(response){
+            if (response.status == 200) {
+
+              var article = response.data;
+              if (article.news_series_id) {
+                Series.find(article.news_series_id).then(function(response){
+                  article.series.push(response.data);
+                })
+
+              }
+              $scope.article = article;
+            }
+          });
+        }
+
         $scope.update = function(){
             $scope.post.updated_at = Date.now;
             $scope.post.image = $scope.image;
@@ -82,7 +99,15 @@
               })
             }
         }
-
+        $scope.deletePublished = function(post){
+          if ($window.confirm('Please confirm?')) {
+            Post.delete(post._id).then(function(response){
+              if (response.status == 200) {
+                $state.go('post publish');
+              }
+            })
+          }
+        }
         $scope.viewImage = function(){
             $scope.hinhanh = $scope.image;
         }
@@ -95,11 +120,17 @@
             $scope.reverse = !$scope.reverse; //if true make it false and vice versa
         };
         $scope.findHide = function(){
-          Post.findHide().then(function(response){
-            if (response.status === 200) {
-              $scope.hidePosts = response.data;
-            }
+          $scope.hidePosts = [];
+          angular.forEach(MeanUser.user.categories, function(value, key){
+            Post.findByCateHide(value).then(function(response){
+              $scope.hidePosts = [].concat($scope.hidePosts, response.data);
+            })
           })
+          // Post.findHide().then(function(response){
+          //   if (response.status === 200) {
+          //     $scope.hidePosts = response.data;
+          //   }
+          // })
         }
         $scope.published = function(post){
           if ($window.confirm('Please confirm?')) {
@@ -110,6 +141,15 @@
                   inherit: false,
                   notify: true
                 });
+              }
+            })
+          }
+        }
+        $scope.publishedPostReview = function(post){
+          if ($window.confirm('Please confirm?')) {
+            Post.published(post._id).then(function(response){
+              if (response.status == 200) {
+                $state.go('post publish');
               }
             })
           }

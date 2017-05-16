@@ -1,0 +1,46 @@
+<div class="container-fluid content" ng-controller="PostController" ng-init="getPostReview()">
+
+    <div class="col-xs-12">
+        <div class="row">
+            <article class="col-md-12 post">
+                <section>
+                    <img ng-if="article.image" class="bieutuong" ng-src="/api/files/uploads/{{article.image}}" height="50" width="50" alt="">
+                    <div class="header-article">
+
+                        <h1>
+                            <a href="">{{ article.title }}</a>
+                        </h1>
+                        <h2>
+                            Tác giả: <span class="tacgia">{{ article.author }}</span> Ngày: {{ article.created_at | date:"dd/MM/yyyy" }} Series: <span ng-hide="article.news_series_id">NULL</span> <span ng-show="article.news_series_id" class="series"><a href="">{{ article.series[0].name }}</a> </span>View: {{ article.view_count }}
+                        </h2>
+                    </div>
+                </section>
+                <section ng-right-click class="post-desc clearfix">
+
+                    <div bind-html-compile="article.content">
+                    </div>
+
+                </section>
+                <!-- <section class="posts-together clearfix">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="post-together post-prev">
+                                <a href="#"><i class="fa fa-angle-double-left"></i> Previous
+                                                <span>Back to school with courses of  Universum</span></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="post-together post-next">
+                                <a href="#">Next <i class="fa fa-angle-double-right"></i>
+                                                <span>Research works of students about to be start</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </section> -->
+            </article>
+            <button ng-click="publishedPostReview(article);" class="btn btn-primary ">Published</button>
+            <button ng-click="deletePublished(article);" class="btn btn-danger btn-rounded btn-sm">Delete</button>
+        </div>
+    </div>
+
+</div>

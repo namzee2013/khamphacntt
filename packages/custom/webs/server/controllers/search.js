@@ -16,7 +16,7 @@ exports.search = function(req, res, next){
       case 'keywords':
         Post.paginate({
           keywords: {
-            $regex: '.*^' + req.query.text.replace(' ','|^') + '.*',
+            $regex: '.*^' + req.query.text.replace(' ','|') + '.*',
             $options: 'i'
           },
           published: 'Yes',

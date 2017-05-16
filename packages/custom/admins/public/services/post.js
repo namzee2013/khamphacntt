@@ -56,6 +56,18 @@
               });
               return deferred.promise;
             },
+            findByCateHide: function(category_id){
+              var deferred = $q.defer();
+              $http({
+                method: 'GET',
+                url: '/api/post/get-post-by-category/hide/' + category_id,
+              }).then(function successCallback(response) {
+                deferred.resolve(response);
+              }, function errorCallback(response) {
+                deferred.reject(response);
+              });
+              return deferred.promise;
+            },
             update: function(id, data){
               var deferred = $q.defer();
               $http({

@@ -13,6 +13,8 @@ var Admins = new Module('admins');
  * Dependency injection is used to define required modules
  */
 Admins.register(function(app, auth, database, circles) {
+  circles.registerCircle('management', ['admin']);
+
   var userModel = database.connection.model('User');
   userModel.schema.add({
     categories:{
@@ -58,7 +60,15 @@ Admins.register(function(app, auth, database, circles) {
     link: 'access for user index',
     roles: ['admin'],
     menu: 'admin'
-  })
+  });
+  Admins.menus.add({
+    title: 'circles',
+    link: 'manage circles',
+    roles: ['admin'],
+    menu: 'admin'
+  });
+
+
   /**
     //Uncomment to use. Requires meanio@0.3.7 or above
     // Save settings with callback

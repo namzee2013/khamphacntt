@@ -130,6 +130,15 @@ exports.findHide = function(req, res, next){
   })
 }
 
+exports.getPostByCategoryHide = function(req, res, next){
+  Post.find({category_id: req.params.cateID, status: 'hide'}, function(err, data){
+    if (err) {
+      res.json(err);
+    }
+    res.json(data);
+  })
+}
+
 exports.published = function(req, res, next){
   Post.findOne({_id: req.params.id}, function(err, data){
     var post = data;

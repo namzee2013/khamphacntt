@@ -47,8 +47,8 @@
                                 <td>{{ post.status }}</td>
                                 <td>{{ post.published }}</td>
                                 <td>
+                                    <a ui-sref="post publish review({id: post._id})" class="btn btn-info" href="#">review</a>
                                     <button ng-click="published(post);" class="btn btn-default btn-rounded btn-sm"><span class="fa fa-pencil"></span></button>
-
                                 </td>
                             </tr>
                         </tbody>

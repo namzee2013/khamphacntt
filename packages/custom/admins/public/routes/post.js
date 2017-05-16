@@ -22,7 +22,16 @@
             }
         }).state('post publish', {
           url: '/admin/post/publish',
-          templateUrl: 'admins/views/post/publish.html'
+          templateUrl: 'admins/views/post/publish.html',
+          requiredCircles: {
+            circles: ['management']
+          }
+        }).state('post publish review',{
+          url: '/admin/post/:id/review',
+          templateUrl: 'admins/views/post/review.html',
+          requiredCircles: {
+            circles: ['management']
+          }
         })
         ;
     }

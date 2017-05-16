@@ -25,6 +25,14 @@
         {
 
           var flag = false;
+          Category.find($scope.post.category_id).then(function(response){
+            var cate = response.data.name;
+            angular.forEach(MeanUser.user.roles, function(value, key){
+              if (value === 'create ' + cate) {
+                flag = true;
+              }
+            })
+          });
           angular.forEach(MeanUser.user.categories, function(value, key){
               if (value === $scope.post.category_id) {
                 flag = true;

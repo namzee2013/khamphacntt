@@ -43,9 +43,8 @@
                 deferred.reject(response);
               });
               return deferred.promise;
-            }
-
-
+            },
+            
         };
     }
 

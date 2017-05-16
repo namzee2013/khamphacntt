@@ -8,6 +8,7 @@
 
         var requiresAdmin = circles.controller.hasCircle('admin');
         var requiresLogin = circles.controller.hasCircle('authenticated');
+        var requiresManagement = circles.controller.hasCircle('management');
 
         app.get('/api/post', requiresLogin, post.findAll);
 
@@ -33,6 +34,8 @@
 
         app.get('/api/post/status/hide', post.findHide);
 
-        app.get('/api/post/status/hide/published/:id', post.published);
+        app.get('/api/post/get-post-by-category/hide/:cateID', post.getPostByCategoryHide)
+
+        app.get('/api/post/status/hide/published/:id',requiresManagement, post.published);
     };
 })();
