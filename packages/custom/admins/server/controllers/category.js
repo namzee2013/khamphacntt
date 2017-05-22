@@ -19,7 +19,7 @@ exports.findAll = function(req, res){
 
 exports.create = function(req, res){
     var category = new Category(req.body);
-    
+
     category.save(function(err, newCate){
         if(err){
             return res.send(400);
@@ -67,7 +67,7 @@ exports.update = function(req, res){
     //     res.json(updated);
     // })
 
-    
+
 };
 exports.delete = function(req, res){
     Category.remove({_id: req.params.id}, function(err, deleted){

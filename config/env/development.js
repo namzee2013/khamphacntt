@@ -21,10 +21,10 @@ module.exports = {
     },
     landingPage: '/',
     facebook: {
-      clientID: 'DEFAULT_APP_ID',
-      clientSecret: 'APP_SECRET',
+      clientID: '1863618880578247',
+      clientSecret: '4294ce39722b28e0f56066f94e493601',
       callbackURL: 'http://localhost:3000/api/auth/facebook/callback',
-      enabled: false
+      enabled: true
     },
     twitter: {
       clientID: 'DEFAULT_CONSUMER_KEY',
